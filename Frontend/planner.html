@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Study Planner | StudentAI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        .planner-page {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .planner-header {
+            margin-bottom: 30px;
+        }
+
+        .planner-header h1 {
+            color: #20264a;
+            margin: 10px 0;
+        }
+
+        .planner-card {
+            background: white;
+            padding: 26px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(35, 40, 90, 0.07);
+            margin-bottom: 24px;
+            min-width: 0;
+        }
+
+        .planner-card h2 {
+            color: #252b50;
+            margin-top: 0;
+        }
+
+        .planner-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .planner-form-grid .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .planner-card label {
+            display: block;
+            font-weight: 600;
+            color: #39415f;
+            margin-bottom: 8px;
+        }
+
+        .planner-card input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #ddd9f5;
+            border-radius: 11px;
+            outline: none;
+            font-size: 15px;
+            background: #fcfbff;
+        }
+
+        .planner-card input:focus {
+            border-color: #7056ed;
+            box-shadow: 0 0 0 3px rgba(112, 86, 237, 0.12);
+        }
+
+        .planner-primary-btn {
+            border: none;
+            border-radius: 12px;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #6254e7, #895cf6);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .planner-secondary-btn {
+            border: none;
+            border-radius: 11px;
+            padding: 12px 18px;
+            background: #25264f;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        #aiPlanForm button {
+            width: 100%;
+        }
+
+        #aiPlanResult {
+            line-height: 1.8;
+            padding: 22px;
+            margin-top: 20px;
+            text-align: left;
+            background: #f8f7ff;
+            border: 1px solid #ebe8ff;
+            border-radius: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        #aiPlanResult h1,
+        #aiPlanResult h2,
+        #aiPlanResult h3 {
+            color: #4938c9;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        #aiPlanResult ul {
+            padding-left: 25px;
+        }
+
+        #aiPlanResult li {
+            margin-bottom: 8px;
+        }
+
+        #savedPlans,
+        #taskList {
+            overflow-wrap: anywhere;
+        }
+
+        #savedPlans h3 {
+            color: #252b50;
+        }
+
+        #savedPlans > div,
+        #taskList > div {
+            margin-bottom: 14px;
+        }
+
+        .planner-divider {
+            border: none;
+            border-top: 1px solid #eceaf5;
+            margin: 28px 0;
+        }
+
+        .planner-back {
+            margin: 5px 0 30px;
+        }
+
+        @media (max-width: 650px) {
+            .planner-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .planner-form-grid .full-width {
+                grid-column: auto;
+            }
+
+            .planner-card {
+                padding: 19px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="main planner-page">
+
+        <!-- Header -->
+        <header class="planner-header">
+            <p class="eyebrow">SMART ACADEMIC PLANNING</p>
+
+            <h1>📚 AI Study Planner</h1>
+
+            <p class="muted">
+                Generate intelligent study plans, organize daily tasks
+                and track your learning goals.
+            </p>
+        </header>
+
+        <!-- AI Study Plan Generator -->
+        <section class="planner-card">
+
+            <h2>🤖 Generate AI Study Plan</h2>
+
+            <p class="muted">
+                Let AI create a personalized study schedule for your subjects.
+            </p>
+
+            <form id="aiPlanForm" class="planner-form-grid">
+
+                <div class="full-width">
+                    <label for="aiSubjects">Subjects</label>
+
+                    <input
+                        type="text"
+                        id="aiSubjects"
+                        placeholder="Java, Data Mining, DBMS"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label for="aiHours">Study hours per day</label>
+
+                    <input
+                        type="number"
+                        id="aiHours"
+                        min="1"
+                        max="16"
+                        value="3"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label for="aiDays">Number of days</label>
+
+                    <input
+                        type="number"
+                        id="aiDays"
+                        min="1"
+                        max="30"
+                        value="7"
+                        required
+                    >
+                </div>
+
+                <div class="full-width">
+                    <button type="submit" class="planner-primary-btn">
+                        ✨ Generate AI Study Plan
+                    </button>
+                </div>
+
+            </form>
+
+            <div id="aiPlanResult">
+                Your AI study plan will appear here.
+            </div>
+
+            <button
+                type="button"
+                id="savePlanBtn"
+                class="planner-secondary-btn"
+                style="margin-top:15px;"
+            >
+                💾 Save Study Plan
+            </button>
+
+        </section>
+
+        <!-- Saved Plans -->
+        <section class="planner-card">
+
+            <h2>📚 My Saved Study Plans</h2>
+
+            <p class="muted">
+                Access your previously generated and saved study plans.
+            </p>
+
+            <div id="savedPlans">
+                <h3>Saved Plans</h3>
+            </div>
+
+        </section>
+
+        <!-- Add Study Task -->
+        <section class="planner-card">
+
+            <h2>➕ Add Study Task</h2>
+
+            <p class="muted">
+                Add your daily academic tasks and stay organized.
+            </p>
+
+            <form id="plannerForm" class="planner-form-grid">
+
+                <div>
+                    <label for="subject">Subject</label>
+
+                    <input
+                        type="text"
+                        id="subject"
+                        placeholder="Example: Java"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label for="task">Study Task</label>
+
+                    <input
+                        type="text"
+                        id="task"
+                        placeholder="Example: Revise OOP concepts"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label for="studyDate">Study Date</label>
+
+                    <input
+                        type="date"
+                        id="studyDate"
+                        required
+                        min="2026-11-04"
+                        value="2026-11-05"
+                    >
+                </div>
+
+                <div class="full-width">
+                    <button type="submit" class="planner-primary-btn">
+                        ➕ Add Study Task
+                    </button>
+                </div>
+
+            </form>
+
+        </section>
+
+        <!-- My Study Tasks -->
+        <section class="planner-card">
+
+            <h2>📝 My Study Tasks</h2>
+
+            <p class="muted">
+                View, complete or delete your study tasks.
+            </p>
+
+            <div id="taskList">
+                Loading tasks...
+            </div>
+
+        </section>
+
+        <button
+            type="button"
+            class="planner-secondary-btn planner-back"
+            onclick="window.location.href='index.html'"
+        >
+            ← Back to Dashboard
+        </button>
+
+        <footer>
+            StudentAI · AI Study Planner · MCA Minor Project
+        </footer>
+
+    </main>
+
+    <script src="planner.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Management | StudentAI</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .attendance-page {
+            max-width: 1050px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .attendance-header {
+            margin-bottom: 28px;
+        }
+
+        .attendance-header h1 {
+            color: #20264a;
+            margin: 10px 0;
+        }
+
+        .attendance-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .attendance-card {
+            background: white;
+            padding: 26px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(35, 40, 90, 0.07);
+            min-width: 0;
+        }
+
+        .attendance-card h2 {
+            color: #252b50;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        #attendanceForm label {
+            display: block;
+            font-weight: 600;
+            margin: 16px 0 8px;
+            color: #39415f;
+        }
+
+        #attendanceForm input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #ddd9f5;
+            border-radius: 11px;
+            outline: none;
+            font-size: 15px;
+            background: #fcfbff;
+        }
+
+        #attendanceForm input:focus {
+            border-color: #7056ed;
+            box-shadow: 0 0 0 3px rgba(112, 86, 237, 0.12);
+        }
+
+        #attendanceForm button {
+            width: 100%;
+            margin-top: 24px;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #6254e7, #895cf6);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        #attendanceResult {
+            margin-top: 20px;
+            overflow-wrap: anywhere;
+        }
+
+        #attendanceRecords {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-wrap: anywhere;
+        }
+
+        #attendanceRecords:empty {
+            display: block;
+        }
+
+        .back-button {
+            margin-top: 25px;
+            background: #25264f;
+        }
+
+        @media (max-width: 750px) {
+            .attendance-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="main attendance-page">
+
+        <!-- Page Header -->
+        <header class="attendance-header">
+            <p class="eyebrow">ACADEMIC PERFORMANCE TRACKER</p>
+
+            <h1>📚 Attendance Management</h1>
+
+            <p class="muted">
+                Monitor your subject-wise attendance and stay on track.
+            </p>
+        </header>
+
+        <section class="attendance-layout">
+
+            <!-- Attendance Calculator -->
+            <div class="attendance-card">
+
+                <h2>📝 Calculate Attendance</h2>
+
+                <p class="muted">
+                    Enter your class details to calculate your attendance percentage.
+                </p>
+
+                <form id="attendanceForm">
+
+                    <label for="subjectName">Subject Name</label>
+
+                    <input
+                        type="text"
+                        id="subjectName"
+                        placeholder="Example: Data Mining"
+                        required
+                    >
+
+                    <label for="totalClasses">Total Classes</label>
+
+                    <input
+                        type="number"
+                        id="totalClasses"
+                        min="1"
+                        placeholder="Enter total classes"
+                        required
+                    >
+
+                    <label for="attendedClasses">Classes Attended</label>
+
+                    <input
+                        type="number"
+                        id="attendedClasses"
+                        min="0"
+                        placeholder="Enter attended classes"
+                        required
+                    >
+
+                    <button type="submit">
+                        Calculate Attendance →
+                    </button>
+
+                </form>
+
+                <div id="attendanceResult" aria-live="polite"></div>
+
+            </div>
+
+            <!-- Attendance Records -->
+            <div class="attendance-card">
+
+                <h2>📊 Attendance Records</h2>
+
+                <p class="muted">
+                    View your calculated subject-wise attendance.
+                </p>
+
+                <div id="attendanceRecords">
+                    <p class="muted">
+                        Your attendance records will appear here.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <button
+            type="button"
+            class="back-button"
+            onclick="window.location.href='index.html'"
+        >
+            ← Back to Dashboard
+        </button>
+
+        <footer>
+            StudentAI · Attendance Management · MCA Minor Project
+        </footer>
+
+    </main>
+
+    <script src="attendance.js"></script>
+
+</body>
+</html>

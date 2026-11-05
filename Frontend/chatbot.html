@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Study Assistant</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .chat-page {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .chat-header h1 {
+            margin: 0 0 8px;
+            color: #20264a;
+        }
+
+        .chat-header p {
+            margin: 0;
+        }
+
+        .chat-layout {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .chat-card, .history-card {
+            background: white;
+            padding: 24px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(35, 40, 90, 0.07);
+            min-width: 0;
+        }
+
+        .chat-card h2, .history-card h2 {
+            margin-top: 0;
+            color: #252b50;
+        }
+
+        #chatMessages {
+            min-height: 300px;
+            max-height: 450px;
+            overflow-y: auto;
+            padding: 18px;
+            background: #f6f5ff;
+            border: 1px solid #ebe8ff;
+            border-radius: 14px;
+            margin-bottom: 18px;
+            overflow-wrap: anywhere;
+        }
+
+        #chatMessages p {
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 12px;
+            line-height: 1.6;
+        }
+
+        #chatMessages .message {
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 12px;
+            line-height: 1.6;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            min-width: 0;
+            padding: 14px;
+            border: 1px solid #ddd9f5;
+            border-radius: 12px;
+            outline: none;
+        }
+
+        .chat-input-area input:focus {
+            border-color: #7056ed;
+            box-shadow: 0 0 0 3px rgba(112, 86, 237, 0.12);
+        }
+
+        .chat-input-area button, .history-button {
+            border: none;
+            border-radius: 12px;
+            padding: 13px 20px;
+            background: linear-gradient(135deg, #6254e7, #895cf6);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .history-button {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        #chatHistory {
+            max-height: 480px;
+            overflow-y: auto;
+            background: #f8f7ff;
+            border-radius: 12px;
+            padding: 15px;
+            overflow-wrap: anywhere;
+        }
+
+        #chatHistory h3 {
+            margin-top: 0;
+            color: #252b50;
+        }
+
+        #chatHistory p, #chatHistory div {
+            line-height: 1.6;
+        }
+
+        .chat-footer {
+            margin-top: 18px;
+            color: #777f96;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .back-button {
+            margin-top: 22px;
+            background: #25264f;
+        }
+
+        @media (max-width: 750px) {
+            .chat-layout {
+                grid-template-columns: 1fr;
+            }
+
+            #chatMessages {
+                min-height: 250px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .chat-input-area {
+                flex-direction: column;
+            }
+
+            .chat-input-area input,
+            .chat-input-area button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="main chat-page">
+
+        <!-- Header -->
+        <header class="chat-header">
+            <div>
+                <p class="eyebrow">YOUR PERSONAL AI LEARNING PARTNER</p>
+                <h1>🤖 AI Study Assistant</h1>
+                <p class="muted">
+                    Ask questions, understand concepts and improve your learning.
+                </p>
+            </div>
+        </header>
+
+        <!-- Chat and History -->
+        <section class="chat-layout">
+
+            <!-- Chat Window -->
+            <div class="chat-card">
+
+                <h2>💬 Start a Conversation</h2>
+
+                <p class="muted">
+                    Ask anything related to your studies.
+                </p>
+
+                <div id="chatMessages" class="chat-messages">
+                    <p>
+                        <strong>Study Assistant:</strong>
+                        Hello! How can I help you with your studies today? 😊
+                    </p>
+                </div>
+
+                <form id="chatForm">
+
+                    <label for="userQuestion">Ask your question</label>
+
+                    <div class="chat-input-area">
+
+                        <input
+                            type="text"
+                            id="userQuestion"
+                            placeholder="Example: Explain Data Mining..."
+                            required
+                        >
+
+                        <button type="submit">Send ➤</button>
+
+                    </div>
+
+                </form>
+
+                <p class="chat-footer">
+                    Powered by AI · Your Academic Companion
+                </p>
+
+            </div>
+
+            <!-- Previous Conversations -->
+            <aside class="history-card">
+
+                <h2>📚 Chat History</h2>
+
+                <p class="muted">
+                    Revisit your previous AI conversations.
+                </p>
+
+                <button
+                    type="button"
+                    id="loadHistoryBtn"
+                    class="history-button"
+                >
+                    🔄 Load Chat History
+                </button>
+
+                <div id="chatHistory">
+                    <h3>Previous Conversations</h3>
+                    <p class="muted">
+                        Click Load Chat History to see your conversations.
+                    </p>
+                </div>
+
+            </aside>
+
+        </section>
+
+        <!-- Back Button -->
+        <button
+            type="button"
+            class="back-button"
+            onclick="window.location.href='index.html'"
+        >
+            ← Back to Dashboard
+        </button>
+
+    </main>
+
+    <script src="chatbot.js"></script>
+
+</body>
+</html>

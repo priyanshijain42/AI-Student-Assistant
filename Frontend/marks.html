@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks Management | StudentAI</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .marks-page {
+            max-width: 1050px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .marks-header {
+            margin-bottom: 28px;
+        }
+
+        .marks-header h1 {
+            color: #20264a;
+            margin: 10px 0;
+        }
+
+        .marks-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .marks-card {
+            background: white;
+            padding: 26px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(35, 40, 90, 0.07);
+            min-width: 0;
+        }
+
+        .marks-card h2 {
+            color: #252b50;
+            margin-top: 0;
+            margin-bottom: 18px;
+        }
+
+        #marksForm label {
+            display: block;
+            font-weight: 600;
+            margin: 16px 0 8px;
+            color: #39415f;
+        }
+
+        #marksForm input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #ddd9f5;
+            border-radius: 11px;
+            outline: none;
+            font-size: 15px;
+            background: #fcfbff;
+        }
+
+        #marksForm input:focus {
+            border-color: #7056ed;
+            box-shadow: 0 0 0 3px rgba(112, 86, 237, 0.12);
+        }
+
+        #marksForm button {
+            width: 100%;
+            margin-top: 24px;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #6254e7, #895cf6);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        #marksResult {
+            margin-top: 20px;
+            overflow-wrap: anywhere;
+        }
+
+        #marksRecords {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-wrap: anywhere;
+        }
+
+        .back-button {
+            margin-top: 25px;
+            background: #25264f;
+        }
+
+        @media (max-width: 750px) {
+            .marks-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="main marks-page">
+
+        <!-- Page Header -->
+        <header class="marks-header">
+            <p class="eyebrow">ACADEMIC PERFORMANCE TRACKER</p>
+
+            <h1>📊 Marks Management</h1>
+
+            <p class="muted">
+                Manage your subject-wise marks and monitor your academic performance.
+            </p>
+        </header>
+
+        <section class="marks-layout">
+
+            <!-- Marks Entry -->
+            <div class="marks-card">
+
+                <h2>📝 Enter Subject Marks</h2>
+
+                <p class="muted">
+                    Enter obtained and total marks to calculate your percentage.
+                </p>
+
+                <form id="marksForm">
+
+                    <label for="subjectName">Subject Name</label>
+
+                    <input
+                        type="text"
+                        id="subjectName"
+                        placeholder="Example: Data Mining"
+                        required
+                    >
+
+                    <label for="obtainedMarks">Obtained Marks</label>
+
+                    <input
+                        type="number"
+                        id="obtainedMarks"
+                        min="0"
+                        placeholder="Enter obtained marks"
+                        required
+                    >
+
+                    <label for="totalMarks">Total Marks</label>
+
+                    <input
+                        type="number"
+                        id="totalMarks"
+                        min="1"
+                        placeholder="Enter total marks"
+                        required
+                    >
+
+                    <button type="submit">
+                        Calculate Percentage →
+                    </button>
+
+                </form>
+
+                <div id="marksResult" aria-live="polite"></div>
+
+            </div>
+
+            <!-- Marks Records -->
+            <div class="marks-card">
+
+                <h2>📈 Subject Marks Records</h2>
+
+                <p class="muted">
+                    View your saved subject-wise performance.
+                </p>
+
+                <div id="marksRecords">
+                    <p class="muted">
+                        Your marks records will appear here.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <button
+            type="button"
+            class="back-button"
+            onclick="window.location.href='index.html'"
+        >
+            ← Back to Dashboard
+        </button>
+
+        <footer>
+            StudentAI · Marks Management · MCA Minor Project
+        </footer>
+
+    </main>
+
+    <script src="marks.js"></script>
+
+</body>
+</html>

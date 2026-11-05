@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Study Timetable | StudentAI</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f4fc;
+            color: #25264f;
+        }
+
+        .timetable-page {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .timetable-header {
+            margin-bottom: 28px;
+        }
+
+        .timetable-header h1 {
+            color: #25264f;
+            margin: 10px 0;
+        }
+
+        .timetable-card {
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(35, 40, 90, 0.07);
+            margin-bottom: 24px;
+        }
+
+        .timetable-card h2 {
+            color: #292653;
+            margin-top: 0;
+        }
+
+        .timetable-card label {
+            display: block;
+            font-weight: 600;
+            color: #414365;
+            margin-bottom: 9px;
+        }
+
+        .timetable-card input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #dedaf3;
+            border-radius: 11px;
+            background: #fcfbff;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .timetable-card input:focus {
+            border-color: #7056ed;
+            box-shadow: 0 0 0 3px rgba(112, 86, 237, 0.12);
+        }
+
+        .timetable-form-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-top: 22px;
+        }
+
+        .timetable-primary-btn {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #6254e7, #895cf6);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 24px;
+        }
+
+        .timetable-primary-btn:hover {
+            opacity: 0.92;
+        }
+
+        #timetableResult {
+            margin-top: 24px;
+            padding: 22px;
+            border-radius: 14px;
+            background: #f8f7ff;
+            border: 1px solid #ebe8ff;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        #timetableResult h2,
+        #timetableResult h3 {
+            color: #5745ce;
+        }
+
+        #timetableResult ul {
+            padding-left: 24px;
+        }
+
+        #timetableResult li {
+            margin-bottom: 10px;
+        }
+
+        .timetable-back {
+            border: none;
+            border-radius: 11px;
+            padding: 13px 20px;
+            background: #292653;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 28px;
+        }
+
+        @media(max-width: 650px) {
+            .timetable-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timetable-card {
+                padding: 19px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="timetable-page">
+
+        <header class="timetable-header">
+            <p class="eyebrow">SMART ACADEMIC SCHEDULING</p>
+            <h1>📚 Smart Study Timetable</h1>
+            <p class="muted">
+                Create your personalized study plan and organize
+                your daily learning routine with StudentAI.
+            </p>
+        </header>
+
+        <section class="timetable-card">
+
+            <h2>🗓️ Generate Your Study Timetable</h2>
+
+            <p class="muted">
+                Enter your subjects and available daily study hours
+                to generate a personalized timetable.
+            </p>
+
+            <form id="timetableForm">
+
+                <div class="timetable-form-grid">
+
+                    <div>
+                        <label for="subjects">
+                            📚 Enter Subjects
+                        </label>
+
+                        <input
+                            type="text"
+                            id="subjects"
+                            placeholder="Java, Data Mining, Python, DBMS"
+                            required
+                        >
+                    </div>
+
+                    <div>
+                        <label for="studyHours">
+                            ⏰ Daily Study Hours
+                        </label>
+
+                        <input
+                            type="number"
+                            id="studyHours"
+                            min="1"
+                            max="12"
+                            value="4"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <button type="submit" class="timetable-primary-btn">
+                    ✨ Generate My Timetable
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="timetable-card">
+
+            <h2>📋 Your Generated Timetable</h2>
+
+            <p class="muted">
+                Your personalized study schedule will appear below.
+            </p>
+
+            <div id="timetableResult">
+                <p>Your timetable will appear here.</p>
+            </div>
+
+        </section>
+
+        <button
+            type="button"
+            class="timetable-back"
+            onclick="window.location.href='index.html'"
+        >
+            ← Back to Dashboard
+        </button>
+
+        <footer class="muted">
+            StudentAI · Smart Study Timetable · MCA Minor Project
+        </footer>
+
+    </main>
+
+    <script src="timetable.js"></script>
+
+</body>
+</html>

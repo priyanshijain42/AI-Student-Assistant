@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Progress Tracker | StudentAI</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f4fc;
+            color: #25264f;
+        }
+
+        .progress-page {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .progress-header {
+            margin-bottom: 28px;
+        }
+
+        .progress-header h1 {
+            color: #25264f;
+            margin: 10px 0;
+        }
+
+        .progress-card {
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(35, 40, 90, 0.07);
+            margin-bottom: 24px;
+            min-width: 0;
+        }
+
+        .progress-card h2 {
+            color: #292653;
+            margin-top: 0;
+        }
+
+        .progress-card label {
+            display: block;
+            font-weight: 600;
+            color: #414365;
+            margin-bottom: 9px;
+        }
+
+        .progress-card input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #dedaf3;
+            border-radius: 11px;
+            background: #fcfbff;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .progress-card input:focus {
+            border-color: #7056ed;
+            box-shadow: 0 0 0 3px rgba(112, 86, 237, 0.12);
+        }
+
+        .progress-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 22px;
+        }
+
+        .progress-primary-btn {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #6254e7, #895cf6);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 24px;
+        }
+
+        .progress-primary-btn:hover {
+            opacity: 0.92;
+        }
+
+        #progressResult {
+            margin-top: 20px;
+            padding: 22px;
+            border-radius: 14px;
+            background: #f8f7ff;
+            border: 1px solid #ebe8ff;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        #progressResult h2,
+        #progressResult h3 {
+            color: #5745ce;
+        }
+
+        .progress-back {
+            border: none;
+            border-radius: 11px;
+            padding: 13px 20px;
+            background: #292653;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 28px;
+        }
+
+        @media(max-width: 650px) {
+            .progress-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-card {
+                padding: 19px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="progress-page">
+
+        <header class="progress-header">
+            <p class="eyebrow">YOUR LEARNING JOURNEY</p>
+
+            <h1>📊 Study Progress Tracker</h1>
+
+            <p class="muted">
+                Track your daily learning progress, monitor completed
+                tasks and stay motivated towards your academic goals.
+            </p>
+        </header>
+
+        <section class="progress-card">
+
+            <h2>📝 Record Today's Progress</h2>
+
+            <p class="muted">
+                Enter your study hours and completed tasks for today.
+            </p>
+
+            <form id="progressForm">
+
+                <div class="progress-form-grid">
+
+                    <div>
+                        <label for="hours">
+                            ⏰ Today's Study Hours
+                        </label>
+
+                        <input
+                            type="number"
+                            id="hours"
+                            min="0"
+                            max="24"
+                            step="0.5"
+                            placeholder="Enter study hours"
+                            required
+                        >
+                    </div>
+
+                    <div>
+                        <label for="tasks">
+                            ✅ Completed Study Tasks
+                        </label>
+
+                        <input
+                            type="number"
+                            id="tasks"
+                            min="0"
+                            step="1"
+                            placeholder="Enter completed tasks"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <button type="submit" class="progress-primary-btn">
+                    💾 Save My Progress
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="progress-card">
+
+            <h2>📈 My Learning Progress</h2>
+
+            <p class="muted">
+                View your recorded study progress and learning activity.
+            </p>
+
+            <div id="progressResult">
+                <h2>My Progress</h2>
+                <p>No progress recorded yet.</p>
+            </div>
+
+        </section>
+
+        <button
+            type="button"
+            class="progress-back"
+            onclick="window.location.href='index.html'"
+        >
+            ← Back to Dashboard
+        </button>
+
+        <footer class="muted">
+            StudentAI · Study Progress Tracker · MCA Minor Project
+        </footer>
+
+    </main>
+
+    <script src="progress.js"></script>
+
+</body>
+</html>
